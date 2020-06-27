@@ -20,12 +20,18 @@ public class ProductController {
 
 	@Autowired
 	private ProductDaoService service;
-
+	
+	/**
+	 * api to retrieve all products
+	 */
 	@GetMapping("/products")
 	public List<Product> retrieveAllProducts() {
 		return service.viewAll();
 	}
 
+	/**
+	 * api to retrieve product by id
+	 */
 	@GetMapping("/products/{id}")
 	public Product retrieveProduct(@PathVariable int id) throws UserNotFoundException {
 		Product product = service.productDetails(id);
@@ -35,11 +41,17 @@ public class ProductController {
 		return product;
 	}
 
+	/**
+	 * api to create a product
+	 */
 	@PostMapping("/products")
 	public void createProduct(@RequestBody Product product) {
 		service.create(product);
 	}
 
+	/**
+	 * api to delete a product
+	 */
 	@DeleteMapping("/products/{id}")
 	public String removeProduct(@PathVariable int id) {
 		Product product = service.deleteById(id);
